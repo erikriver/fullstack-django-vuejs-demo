@@ -76,5 +76,5 @@ media/
 
 # Venv
 venv
-
+pg/
 db.sqlite

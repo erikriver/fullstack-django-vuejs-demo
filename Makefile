@@ -40,6 +40,6 @@ run:
 
 clean:
 	rm -rf venv && \
-	rm backend/db.sqlite3
+	rm backend/db.sqlite
 
 all: backend frontend run
