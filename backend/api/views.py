@@ -3,8 +3,8 @@ from django.contrib.gis.db.models.functions import Distance
 
 from rest_framework import viewsets
 from rest_framework.exceptions import ParseError
-from .serializers import PlaceSerializer
-from .models import Place
+from .serializers import PlaceSerializer, BookingSerializer
+from .models import Place, Booking
 
 
 class PlaceViewSet(viewsets.ModelViewSet):
@@ -28,3 +28,12 @@ class PlaceViewSet(viewsets.ModelViewSet):
         return Place.objects.annotate(distance=Distance("position", point)).order_by(
             "distance"
         )[0:10]
+
+
+class BookingViewSet(viewsets.ModelViewSet):
+    """
+    Viewset creates a booking for a property
+    url: /api/bookings
+    """
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer

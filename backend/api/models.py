@@ -4,7 +4,7 @@ from django.contrib.gis.db import models
 
 class Place(models.Model):
     """
-    A place in a city
+    A place in somewhere
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -19,3 +19,19 @@ class Place(models.Model):
 
     def __str__(self):
         return "{} ({:f}, {:f})".format(self.title, self.position.x, self.position.y)
+
+
+class Booking(models.Model):
+    """
+    a booking for a place
+    """
+    gest_name = models.CharField(max_length=255)
+    checkin = models.DateField()
+    checkout = models.DateField()
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ("gest_name",)
+
+    def __str__(self):
+        return "{}".format(self.gest_name)
