@@ -7,6 +7,7 @@ class PlaceSerializer(ModelSerializer):
     """
     GeoFeatureModelSerializer will output data in a format that is GeoJSON compatible
     """
+
     location = SerializerMethodField()
 
     class Meta:

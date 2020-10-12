@@ -40,6 +40,7 @@ class BookingViewSet(viewsets.ModelViewSet):
     TODO:
         permission_classes = [permissions.IsAuthenticated]
     """
+
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
@@ -52,8 +53,9 @@ class PlaceBookingViewSet(viewsets.ModelViewSet):
     TODO:
         permission_classes = [permissions.IsAuthenticated]
     """
+
     serializer_class = BookingSerializer
 
     def get_queryset(self):
-        place_id = self.kwargs['property_id']
+        place_id = self.kwargs["property_id"]
         return Booking.objects.filter(place__id=place_id)

@@ -9,22 +9,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Place',
+            name="Place",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=500)),
-                ('external_id', models.CharField(max_length=255)),
-                ('address', models.TextField()),
-                ('position', django.contrib.gis.db.models.fields.PointField(srid=4326)),
-                ('extra', models.JSONField()),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("title", models.CharField(max_length=500)),
+                ("external_id", models.CharField(max_length=255)),
+                ("address", models.TextField()),
+                ("position", django.contrib.gis.db.models.fields.PointField(srid=4326)),
+                ("extra", models.JSONField()),
             ],
             options={
-                'ordering': ('title',),
+                "ordering": ("title",),
             },
         ),
     ]

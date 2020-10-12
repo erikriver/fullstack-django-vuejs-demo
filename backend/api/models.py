@@ -25,6 +25,7 @@ class Booking(models.Model):
     """
     a booking for a place
     """
+
     gest_name = models.CharField(max_length=255)
     checkin = models.DateField()
     checkout = models.DateField()

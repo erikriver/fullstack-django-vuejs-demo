@@ -51,24 +51,23 @@ class PlaceSortingTest(TestCase):
         ]
 
     def test_order_places(self):
-        point_berlin = {'lat': 52.517626, 'lng': 13.377864}
+        point_berlin = {"lat": 52.517626, "lng": 13.377864}
 
-        url = '/api/properties/?at=%s,%s' % (
-            point_berlin['lat'], point_berlin['lng']
-        )
+        url = "/api/properties/?at=%s,%s" % (point_berlin["lat"], point_berlin["lng"])
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         json_response = json.loads(response.content)
 
-        place_list = ['Adlon Kempinski Berlin',
-                      'Hotel Künstlerheim Luise', 'Hamburg Hotel GmbH']
+        place_list = [
+            "Adlon Kempinski Berlin",
+            "Hotel Künstlerheim Luise",
+            "Hamburg Hotel GmbH",
+        ]
 
         self.assertEqual(len(json_response), len(place_list))
         for idx, place_title in enumerate(place_list):
-            self.assertTrue(
-                json_response[idx]['title'] == place_title
-            )
+            self.assertTrue(json_response[idx]["title"] == place_title)
 
 
 class BookingTest(TestCase):
@@ -85,14 +84,15 @@ class BookingTest(TestCase):
         self.place.save()
 
     def test_booking_place(self):
-        data = {'gest_name': 'Jhon Doe',
-                'checkin': '2020-10-10',
-                'checkout': '2020-10-20',
-                'place': str(self.place.id)
-                }
-        response = self.client.post('/api/bookings/', data=data, format='json')
+        data = {
+            "gest_name": "Jhon Doe",
+            "checkin": "2020-10-10",
+            "checkout": "2020-10-20",
+            "place": str(self.place.id),
+        }
+        response = self.client.post("/api/bookings/", data=data, format="json")
         self.assertEqual(response.status_code, 201)
-        booking = Booking.objects.get(gest_name='Jhon Doe')
+        booking = Booking.objects.get(gest_name="Jhon Doe")
         self.assertEqual(booking.place, self.place)
 
 
@@ -110,23 +110,25 @@ class PlacesBookingTest(TestCase):
         self.place.save()
 
     def test_get_bookings_place(self):
-        data = {'gest_name': 'Jhon Doe',
-                'checkin': '2020-10-10',
-                'checkout': '2020-10-20',
-                'place': str(self.place.id)
-                }
-        response = self.client.post('/api/bookings/', data=data, format='json')
+        data = {
+            "gest_name": "Jhon Doe",
+            "checkin": "2020-10-10",
+            "checkout": "2020-10-20",
+            "place": str(self.place.id),
+        }
+        response = self.client.post("/api/bookings/", data=data, format="json")
         self.assertEqual(response.status_code, 201)
 
-        data = {'gest_name': 'Kim Ji',
-                'checkin': '2020-10-11',
-                'checkout': '2020-10-21',
-                'place': str(self.place.id)
-                }
-        response = self.client.post('/api/bookings/', data=data, format='json')
+        data = {
+            "gest_name": "Kim Ji",
+            "checkin": "2020-10-11",
+            "checkout": "2020-10-21",
+            "place": str(self.place.id),
+        }
+        response = self.client.post("/api/bookings/", data=data, format="json")
         self.assertEqual(response.status_code, 201)
 
-        url = '/api/properties/{}/bookings/'.format(str(self.place.id))
+        url = "/api/properties/{}/bookings/".format(str(self.place.id))
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

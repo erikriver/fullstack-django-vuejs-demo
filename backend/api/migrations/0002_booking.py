@@ -7,21 +7,34 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0001_initial'),
+        ("api", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Booking',
+            name="Booking",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('gest_name', models.CharField(max_length=255)),
-                ('checkin', models.DateField()),
-                ('checkout', models.DateField()),
-                ('place', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.place')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("gest_name", models.CharField(max_length=255)),
+                ("checkin", models.DateField()),
+                ("checkout", models.DateField()),
+                (
+                    "place",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="api.place"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('gest_name',),
+                "ordering": ("gest_name",),
             },
         ),
     ]

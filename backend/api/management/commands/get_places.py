@@ -47,17 +47,17 @@ class Command(BaseCommand):
             )
 
             for place in places.items:
-                title = place.pop('title')
-                external_id = place.pop('id')
-                address = place.pop('address')
-                address = address['label']
-                position = place.pop('position')
+                title = place.pop("title")
+                external_id = place.pop("id")
+                address = place.pop("address")
+                address = address["label"]
+                position = place.pop("position")
                 p = Place.objects.create(
                     title=title,
                     address=address,
                     external_id=external_id,
-                    position=Point(position['lat'], position['lng']),
-                    extra = place
+                    position=Point(position["lat"], position["lng"], srid=4326),
+                    extra=place,
                 )
                 p.save()
 
@@ -66,4 +66,3 @@ class Command(BaseCommand):
             raise CommandError("HERE API Error")
         except Error:
             raise CommandError("Database Error")
-
