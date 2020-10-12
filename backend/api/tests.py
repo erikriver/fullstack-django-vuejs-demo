@@ -64,10 +64,10 @@ class PlaceSortingTest(TestCase):
         place_list = ['Adlon Kempinski Berlin',
                       'Hotel Künstlerheim Luise', 'Hamburg Hotel GmbH']
 
-        self.assertEqual(len(json_response['features']), len(place_list))
+        self.assertEqual(len(json_response), len(place_list))
         for idx, place_title in enumerate(place_list):
             self.assertTrue(
-                json_response['features'][idx]['properties']['title'] == place_title
+                json_response[idx]['title'] == place_title
             )
 
 

@@ -1,18 +1,20 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.serializers import ModelSerializer
-from rest_framework_gis.serializers import GeoFeatureModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from .models import Place, Booking
 
 
-class PlaceSerializer(GeoFeatureModelSerializer):
+class PlaceSerializer(ModelSerializer):
     """
     GeoFeatureModelSerializer will output data in a format that is GeoJSON compatible
     """
+    location = SerializerMethodField()
+
     class Meta:
         model = Place
-        geo_field = "position"
-        fields = ["id", "title", "address", "position"]
+        fields = ["id", "title", "address", "location"]
+
+    def get_location(self, obj):
+        return "{:f},{:f}".format(obj.position.x, obj.position.y)
 
 
 class BookingSerializer(ModelSerializer):

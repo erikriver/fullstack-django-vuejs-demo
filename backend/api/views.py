@@ -21,6 +21,8 @@ class PlaceViewSet(viewsets.ModelViewSet):
             (x, y) = (float(n) for n in point_string.split(","))
         except ValueError:
             raise ParseError("Invalid geometry string supplied for parameter `at`")
+        except AttributeError:
+            raise ParseError("Parameter `at` empty or malformed")
 
         point = Point(x, y, srid=4326)
 
