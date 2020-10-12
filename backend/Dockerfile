@@ -5,7 +5,7 @@ WORKDIR /code
 COPY . /code/
 
 RUN apt-get update
-RUN apt-get install -y binutils libproj-dev gdal-bin
+RUN apt-get install -y gdal-bin netcat
 
 RUN pip install pipenv
 RUN pipenv install --system --deploy
