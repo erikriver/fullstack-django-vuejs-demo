@@ -34,6 +34,24 @@ class BookingViewSet(viewsets.ModelViewSet):
     """
     Viewset creates a booking for a property
     url: /api/bookings
+
+    TODO:
+        permission_classes = [permissions.IsAuthenticated]
     """
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+
+
+class PlaceBookingViewSet(viewsets.ModelViewSet):
+    """
+    Viewset returns the bookings for a property
+    url: /api/properties/PROPERTY_ID/bookings
+
+    TODO:
+        permission_classes = [permissions.IsAuthenticated]
+    """
+    serializer_class = BookingSerializer
+
+    def get_queryset(self):
+        place_id = self.kwargs['property_id']
+        return Booking.objects.filter(place__id=place_id)

@@ -71,7 +71,7 @@ class PlaceSortingTest(TestCase):
             )
 
 
-class BookingSortingTest(TestCase):
+class BookingTest(TestCase):
     def setUp(self):
         self.client = APIClient()
 
@@ -94,3 +94,41 @@ class BookingSortingTest(TestCase):
         self.assertEqual(response.status_code, 201)
         booking = Booking.objects.get(gest_name='Jhon Doe')
         self.assertEqual(booking.place, self.place)
+
+
+class PlacesBookingTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+        self.place = Place.objects.create(
+            title="Hamburg Hotel GmbH",
+            address="Hamburg Hotel GmbH, Friedrichstraße 133, 10117 Berlin, Germany",
+            external_id="abc",
+            position=Point(52.52357, 13.38744),
+            extra={},
+        )
+        self.place.save()
+
+    def test_get_bookings_place(self):
+        data = {'gest_name': 'Jhon Doe',
+                'checkin': '2020-10-10',
+                'checkout': '2020-10-20',
+                'place': str(self.place.id)
+                }
+        response = self.client.post('/api/bookings/', data=data, format='json')
+        self.assertEqual(response.status_code, 201)
+
+        data = {'gest_name': 'Kim Ji',
+                'checkin': '2020-10-11',
+                'checkout': '2020-10-21',
+                'place': str(self.place.id)
+                }
+        response = self.client.post('/api/bookings/', data=data, format='json')
+        self.assertEqual(response.status_code, 201)
+
+        url = '/api/properties/{}/bookings/'.format(str(self.place.id))
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        json_response = json.loads(response.content)
+        self.assertEqual(len(json_response), 2)
