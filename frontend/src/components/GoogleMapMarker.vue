@@ -3,7 +3,7 @@
     <div :id="id">
       <h1>{{ marker.title }}</h1>
       <p>{{ marker.address }}</p>
-      <button class="button">Reservation</button>
+      <button class="button">Book</button>
     </div>
   </div>
 </template>
