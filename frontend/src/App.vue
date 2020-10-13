@@ -58,19 +58,16 @@ export default {
       loading: true
     };
   },
-  created() {
+  mounted() {
     axios.get('http://127.0.0.1:8000/api/properties/?at=52.517626,13.377864')
       .then(response => {
         this.places = response.data,
-        console.log(response.data),
         console.log(this.places)
       })
       .catch(error => {
         console.log(error)
       })
       .finally(() => this.loading = false)
-
-    //this.fetchPlaces()
   },
   computed: {
     markers() {
@@ -91,17 +88,6 @@ export default {
       };
     },
   },
-  // methods: {
-  //           fetchPlaces() {
-  //                 fetch('http://127.0.0.1:8000/api/properties/?at=52.517626,13.377864')
-  //                     .then(response => response.json())
-  //                     .then(data => this.places = data)
-  //                     .catch(error => console.error(error))
-  //                 console.log("Help!!!")
-  //                 console.log(this.places)
-
-  //           }
-  // }
 }
 </script>
 

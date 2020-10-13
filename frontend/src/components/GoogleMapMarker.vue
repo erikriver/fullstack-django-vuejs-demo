@@ -47,7 +47,7 @@ export default {
   },
   mounted() {
     this.point = new this.google.maps.Marker({
-      position: this.marker.position,
+      position: this.marker.location,
       map: this.map,
       title: JSON.stringify(this.marker.title),
       icon: Icon,

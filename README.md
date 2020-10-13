@@ -1,5 +1,7 @@
 # Full-Stack Django/VueJS demo
 
+<img src="screenshot.png" />
+
 ## Summary
 A full-stack web app demo with Django, VueJS and PostgreSQL containerized by Docker.
 

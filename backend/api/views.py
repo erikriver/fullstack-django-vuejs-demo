@@ -20,16 +20,16 @@ class PlaceViewSet(viewsets.ModelViewSet):
         try:
             (x, y) = (float(n) for n in point_string.split(","))
         except ValueError:
-            raise ParseError("Invalid geometry string supplied for parameter `at`")
+            raise ParseError(
+                "Invalid geometry string supplied for parameter `at`")
         except AttributeError:
             raise ParseError("Parameter `at` empty or malformed")
 
         point = Point(x, y, srid=4326)
 
-        # only return last 10 around Lat/Lon
         return Place.objects.annotate(distance=Distance("position", point)).order_by(
             "distance"
-        )[0:10]
+        )
 
 
 class BookingViewSet(viewsets.ModelViewSet):
