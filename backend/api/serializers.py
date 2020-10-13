@@ -15,7 +15,7 @@ class PlaceSerializer(ModelSerializer):
         fields = ["id", "title", "address", "location"]
 
     def get_location(self, obj):
-        return "{:f},{:f}".format(obj.position.x, obj.position.y)
+        return {'lat': obj.position.x, 'lng': obj.position.y}
 
 
 class BookingSerializer(ModelSerializer):
