@@ -33,3 +33,16 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
       DB_HOST: ${DB_HOST}
+
+  webserver:
+    build:
+      context: .
+      dockerfile: webserver/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./backend/staticfiles/:/staticfiles/
+      - ./webserver/nginx.conf:/etc/nginx/nginx.conf:ro
+    

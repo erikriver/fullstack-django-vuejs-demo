@@ -24,6 +24,13 @@ class ModelTests(TestCase):
 
 
 class PlaceSortingTest(TestCase):
+    """
+    Test the properties fetched in at specific point
+
+    the idea is that given 3 random points it returns the points ordered 
+    according to the closest to the origin.
+    """
+
     def setUp(self):
         self.client = APIClient()
         self.places = [
@@ -53,7 +60,8 @@ class PlaceSortingTest(TestCase):
     def test_order_places(self):
         point_berlin = {"lat": 52.517626, "lng": 13.377864}
 
-        url = "/api/properties/?at=%s,%s" % (point_berlin["lat"], point_berlin["lng"])
+        url = "/api/properties/?at=%s,%s" % (
+            point_berlin["lat"], point_berlin["lng"])
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -71,6 +79,9 @@ class PlaceSortingTest(TestCase):
 
 
 class BookingTest(TestCase):
+    """
+    Test the booking in a specific place 
+    """
     def setUp(self):
         self.client = APIClient()
 
@@ -97,6 +108,9 @@ class BookingTest(TestCase):
 
 
 class PlacesBookingTest(TestCase):
+    """
+    Test fetching all bookings made in a place.
+    """
     def setUp(self):
         self.client = APIClient()
 

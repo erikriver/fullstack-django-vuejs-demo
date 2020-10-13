@@ -2,6 +2,8 @@
 
 <img src="screenshot.png" />
 
+
+
 ## Summary
 A full-stack web app demo with Django, VueJS and PostgreSQL containerized by Docker.
 
@@ -24,6 +26,12 @@ $ make setup-data
 ```
 
 Wait a minute to run `make setup-data` because the above command may take too long to get up.
+
+After all is configured you can start the project with:
+
+```
+$ make run
+```
 
 You can run the tests with the command:
 
@@ -57,7 +65,9 @@ $ python manage.py runserver
 
 The instructions on how to run and build the frontend are in the `frontend` folder.
 
+You can access to Django admin in http://<url>/admin/ with user `demo` and password `demo`
+
 ## ToDo
     * Authentication
     * Authorization
-    * More tests
+    * More tests integration
